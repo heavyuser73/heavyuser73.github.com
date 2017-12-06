@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<meta http-equiv="Content-Type" Content="text/html; charset=utf-8" />
+
+<html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+<head>
+    <style>
+        body {
+            background-image: url("5408701-balloon-wallpaper.jpeg");
+        }
+    </style>
+</head>
+
+<body ng-app="myApp">
+
+
+
+<div ng-controller="typingController" name="outline">
+    <br>
+    <br>
+    속담 <input type="text" ng-model="inputData" ng-style="inputStyle" readonly><br>
+    <br>
+    속담을 입력 하세요 : <input type="text" ng-model="outputData" ng-keypress="typing($event)"
+                    ng-style="outputStyle"> <br>
+    분당 속도 : {{curScore}}<br>
+    최고 분당 속도 : {{maxScore}}
+</div>
+
+
+
+<script src="controller.js"></script>
+
+</body>
+</html>
