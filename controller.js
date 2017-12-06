@@ -56,28 +56,21 @@ angular.module("myApp", []).controller('typingController', function($scope, $int
     $scope.outputData="";
     $scope.curScore=0;
     $scope.maxScore=0;
-    $scope.takeTime=0;
     $scope.spendSecond=0;
     $scope.startTime=0;
 
     $interval(function () {
         if($scope.isStart == true) {
-            $scope.takeTime = new Date().getTime() - $scope.startTime;
-            $scope.spendSecond = Math.floor($scope.takeTime/1000);
+            $scope.spendSecond = Math.floor((new Date().getTime() - $scope.startTime)/1000);
         }
     }, 1000);
 
     $scope.init = function () {
         var index = Math.floor((Math.random() * $scope.names.length) + 1);
         $scope.inputData = $scope.names[index].data;
-        $scope.outputData = "";
-        $scope.curScore=0;
-        $scope.maxScore=0;
-        $scope.takeTime=0;
     }
 
     $scope.typing = function ($event) {
-
 
         if($scope.isStart == false) {
             $scope.startTime = new Date().getTime();
@@ -96,8 +89,8 @@ angular.module("myApp", []).controller('typingController', function($scope, $int
         $scope.inputData = $scope.names[index].data;
         $scope.inputDataLength = $scope.inputData.length;
         $scope.outputData = "";
-        $scope.takeTime = new Date().getTime() - $scope.startTime;
-        $scope.curScore=Math.floor(($scope.inputDataLength/($scope.takeTime/1000))*60);
+        var takeTime = new Date().getTime() - $scope.startTime;
+        $scope.curScore=Math.floor(($scope.inputDataLength/(takeTime/1000))*60);
         if($scope.maxScore < $scope.curScore) {
             $scope.maxScore = $scope.curScore;
         }
