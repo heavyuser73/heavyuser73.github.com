@@ -1,5 +1,5 @@
 
-angular.module("myApp", []).controller('typingController', function($scope) {
+angular.module("myApp", []).controller('typingController', function($scope, $interval) {
     $scope.names = [
         {data:'가까운 데 집은 깎이고 먼 데 절은 비친다'},
         {data:'가는 날이 장날'},
@@ -52,19 +52,30 @@ angular.module("myApp", []).controller('typingController', function($scope) {
 
     $scope.isStart = false;
 
-    $scope.inputData;
-    $scope.outputData;
-    $scope.curScore;
-    $scope.maxScore;
-    
+    $scope.inputData="";
+    $scope.outputData="";
+    $scope.curScore=0;
+    $scope.maxScore=0;
+    $scope.takeTime=0;
+    $scope.spendSecond=0;
+    $scope.startTime=0;
+
+    $interval(function () {
+        if($scope.isStart == true) {
+            $scope.takeTime = new Date().getTime() - $scope.startTime;
+            $scope.spendSecond = Math.floor($scope.takeTime/1000);
+        }
+    }, 1000);
+
     $scope.init = function () {
         var index = Math.floor((Math.random() * $scope.names.length) + 1);
         $scope.inputData = $scope.names[index].data;
         $scope.outputData = "";
         $scope.curScore=0;
         $scope.maxScore=0;
-
+        $scope.takeTime=0;
     }
+
     $scope.typing = function ($event) {
 
 
@@ -73,6 +84,7 @@ angular.module("myApp", []).controller('typingController', function($scope) {
             $scope.isStart = true;
         }
 
+        // Enter key down
         if($event.keyCode == 13) {
             if($scope.typeCheck() == true)
                 $scope.typeDone();

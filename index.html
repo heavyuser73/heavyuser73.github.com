@@ -23,10 +23,11 @@
     <br>
     속담 <input type="text" ng-model="inputData" ng-style="inputStyle" readonly><br>
     <br>
-    속담을 입력 하세요 : <input type="text" ng-model="outputData" ng-keypress="typing($event)"
+    속담을 입력 하세요 : <input type="text" ng-model="outputData" ng-keydown="typing($event)"
                     ng-style="outputStyle"> <br>
     분당 속도 : {{curScore}}<br>
-    최고 분당 속도 : {{maxScore}}
+    최고 분당 속도 : {{maxScore}}<br>
+    시간 : {{spendSecond}} 초
 </div>
 
 
