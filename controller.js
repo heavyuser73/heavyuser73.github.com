@@ -52,6 +52,11 @@ angular.module("myApp", []).controller('typingController', function($scope) {
 
     $scope.isStart = false;
 
+    $scope.inputData;
+    $scope.outputData;
+    $scope.curScore;
+    $scope.maxScore;
+    
     $scope.init = function () {
         var index = Math.floor((Math.random() * $scope.names.length) + 1);
         $scope.inputData = $scope.names[index].data;
