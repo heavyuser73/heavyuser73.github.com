@@ -1,38 +1,43 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
-<meta http-equiv="Content-Type" Content="text/html; charset=utf-8" />
-
-<html>
-
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<meta http-equiv="Content-Type" Content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <head>
+    <!-- Theme Made By www.w3schools.com - No Copyright -->
+    <title>Bootstrap Theme Simply Me</title>
+
     <style>
-        body {
-            background-image: url("5408701-balloon-wallpaper.jpeg");
+        .bg-1 {
+            background-color: #1abc9c;
+            color: #ffffff;
+        }
+        .bg-2 {
+            background-color: #474e5d;
+            color: #ffffff;
+        }
+        .bg-3 {
+            background-color: #ffffff;
+            color: #555555;
+        }
+        .container-fluid {
+            padding-top: 70px;
+            padding-bottom: 70px;
         }
     </style>
 </head>
-
 <body ng-app="myApp">
-
-
-
-<div ng-controller="typingController" name="outline">
-    <br>
-    <br>
-    속담 <input type="text" ng-model="inputData" ng-style="inputStyle" readonly><br>
-    <br>
-    속담을 입력 하세요 : <input type="text" ng-model="outputData" ng-keydown="typing($event)"
-                    ng-style="outputStyle"> <br>
-    분당 속도 : {{curScore}}<br>
-    최고 분당 속도 : {{maxScore}}<br>
-    시간 : {{spendSecond}} 초
-</div>
-
+<div ng-view></div>
 
 
 <script src="controller.js"></script>
 
 </body>
 </html>
+
+
+

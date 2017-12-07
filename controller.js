@@ -1,5 +1,5 @@
 
-angular.module("myApp", []).controller('typingController', function($scope, $interval, $http) {
+var app = angular.module("myApp", ["ngRoute"]).controller('typingController', function($scope, $interval, $http) {
 
     $scope.returnAudio = new Audio('typewriter-line-break.mp3');
 
@@ -93,7 +93,13 @@ angular.module("myApp", []).controller('typingController', function($scope, $int
             return false;
         }
     }
+}).config(function($routeProvider) {
+    $routeProvider
+        .when("/", {
+            templateUrl : "main.html"
+        }).when("/typing", {
+        templateUrl : "typing.html"
+    });
 });
-
 
 
