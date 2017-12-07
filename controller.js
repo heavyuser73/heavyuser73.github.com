@@ -1,6 +1,8 @@
 
 angular.module("myApp", []).controller('typingController', function($scope, $interval, $http) {
 
+    $scope.returnAudio = new Audio('typewriter-line-break.mp3');
+
     $http.get('saying.json').then(function (value) {
         $scope.sayingData = value.data;
         $scope.init();
@@ -77,6 +79,7 @@ angular.module("myApp", []).controller('typingController', function($scope, $int
                 "font-size" : "18px",
                 "padding" : "5px"
             }
+            $scope.returnAudio.play();
             return true;
         }
 
