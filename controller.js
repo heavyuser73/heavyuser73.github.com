@@ -1,5 +1,8 @@
+'use strict';
 
-var app = angular.module("myApp", ["ngRoute"]).controller('typingController', function($scope, $interval, $http) {
+var app = angular.module("myApp", ['ngRoute']);
+
+app.controller('typingController', function($scope, $interval, $http) {
 
     $scope.returnAudio = new Audio('res/typewriter-line-break.mp3');
 
@@ -93,13 +96,18 @@ var app = angular.module("myApp", ["ngRoute"]).controller('typingController', fu
             return false;
         }
     }
-}).config(function($routeProvider) {
+});
+
+app.config(function($routeProvider) {
+
     $routeProvider
-        .when("/", {
-            templateUrl : "main.html"
-        }).when("/typing", {
-        templateUrl : "typing.html"
-    });
+    .when("/", {
+        templateUrl : "main.html"
+    })
+    .when("/typing", {
+    templateUrl : "typing.html"
+    })
+    .otherwise({redirectTo: '/'});
 });
 
 
