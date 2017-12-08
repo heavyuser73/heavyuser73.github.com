@@ -1,9 +1,9 @@
 
 var app = angular.module("myApp", ["ngRoute"]).controller('typingController', function($scope, $interval, $http) {
 
-    $scope.returnAudio = new Audio('typewriter-line-break.mp3');
+    $scope.returnAudio = new Audio('res/typewriter-line-break.mp3');
 
-    $http.get('saying.json').then(function (value) {
+    $http.get('data/saying_ko.json').then(function (value) {
         $scope.sayingData = value.data;
         $scope.init();
     });
