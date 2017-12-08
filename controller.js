@@ -55,6 +55,7 @@ app.controller('typingController', function($scope, $interval, $http) {
 
         // Enter key down
         if($event.keyCode == 13) {
+            $scope.returnAudio.play();
             if($scope.typeCheck() == true)
                 $scope.typeDone();
         }
@@ -81,7 +82,6 @@ app.controller('typingController', function($scope, $interval, $http) {
                 "font-size" : "18px",
                 "padding" : "5px"
             }
-            $scope.returnAudio.play();
             return true;
         }
 
