@@ -38,11 +38,12 @@ app.controller('typingController', function($scope, $interval, $http) {
         if($scope.isStart == true) {
             $scope.spendSecond = Math.floor((new Date().getTime() - $scope.startTime)/1000);
         }
-    }, 1000);
+    }, 10);
 
     $scope.init = function () {
         var index = Math.floor((Math.random() * $scope.sayingData.length) + 1);
         $scope.inputData = $scope.sayingData[index];
+        $scope.inputDataLength = $scope.inputData.length;
     }
 
     $scope.typing = function ($event) {
@@ -60,16 +61,14 @@ app.controller('typingController', function($scope, $interval, $http) {
     }
 
     $scope.typeDone = function () {
-        var index = Math.floor((Math.random() * 10) + 1);
-        $scope.inputData = $scope.sayingData[index];
-        $scope.inputDataLength = $scope.inputData.length;
         $scope.outputData = "";
-        var takeTime = new Date().getTime() - $scope.startTime;
-        $scope.curScore=Math.floor(($scope.inputDataLength/(takeTime/1000))*60);
+        $scope.takeTime = new Date().getTime() - $scope.startTime;
+        $scope.curScore=Math.floor(($scope.inputDataLength/($scope.takeTime/1000))*60);
         if($scope.maxScore < $scope.curScore) {
             $scope.maxScore = $scope.curScore;
         }
         $scope.isStart = false;
+        $scope.init();
     }
 
     $scope.typeCheck = function () {
