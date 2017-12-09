@@ -2,11 +2,32 @@
 
 var app = angular.module("myApp", ['ngRoute']);
 
-app.controller('typingController', function($scope, $interval, $http) {
+app.controller('mainController', function($scope, $rootScope) {
+
+
+
+    $scope.langs = [{name:"한글", value:"data/saying_ko.json"},
+       {name:"English", value:"data/saying_en.json"}];
+
+     $rootScope.langPath = "data/saying_ko.json"
+
+     $scope.selectedLangChanged = function () {
+        $rootScope.langPath = $scope.selectLang.value;
+     }
+});
+
+app.controller('typingController', function($scope, $interval, $http, $rootScope) {
 
     $scope.returnAudio = new Audio('res/typewriter-line-break.mp3');
 
-    $http.get('data/saying_ko.json').then(function (value) {
+    var path;
+    if($rootScope.langPath) {
+        path = $rootScope.langPath;
+    }
+    else {
+        path = "data/saying_ko.json"
+    }
+    $http.get(path).then(function (value) {
         $scope.sayingData = value.data;
         $scope.init();
     });
@@ -104,7 +125,7 @@ app.config(function($routeProvider) {
         templateUrl : "main.html"
     })
     .when("/typing", {
-    templateUrl : "typing.html"
+        templateUrl : "typing.html"
     })
     .otherwise({redirectTo: '/'});
 });
