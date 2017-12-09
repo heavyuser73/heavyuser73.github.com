@@ -43,7 +43,7 @@ app.controller('typingController', function($scope, $interval, $http) {
     $scope.init = function () {
         var index = Math.floor((Math.random() * $scope.sayingData.length) + 1);
         $scope.inputData = $scope.sayingData[index];
-        $scope.inputDataLength = $scope.inputData.length;
+        $scope.inputDataLength = Hangul.disassemble($scope.inputData).length;
     }
 
     $scope.typing = function ($event) {
