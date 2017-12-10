@@ -2,24 +2,23 @@
 
 var app = angular.module("myApp", ['ngRoute']);
 
-app.controller('mainController', function($scope, $rootScope) {
+app.controller('mainController', function($scope) {
     $scope.langs = [{name:"한글", value:"data/saying_ko.json"},
        {name:"English", value:"data/saying_en.json"}];
 
-     $rootScope.langPath = "data/saying_ko.json"
-
-     $scope.selectedLangChanged = function () {
-        $rootScope.langPath = $scope.selectLang.value;
-     }
+    var defaultLangPath = "data/saying_ko.json";
+    setCookie("langPath", defaultLangPath, 365);
+    $scope.selectedLangChanged = function () {
+        setCookie("langPath", $scope.selectLang.value, 365);
+    }
 });
 
-app.controller('typingController', function($scope, $interval, $http, $rootScope) {
-
+app.controller('typingController', function($scope, $interval, $http) {
     $scope.returnAudio = new Audio('res/typewriter-line-break.mp3');
-
+    var langPath = getCookie("langPath");
     var path;
-    if($rootScope.langPath) {
-        path = $rootScope.langPath;
+    if(langPath != "") {
+        path = langPath;
     }
     else {
         path = "data/saying_ko.json"
@@ -128,3 +127,24 @@ app.config(function($routeProvider) {
 });
 
 
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
