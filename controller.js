@@ -3,9 +3,6 @@
 var app = angular.module("myApp", ['ngRoute']);
 
 app.controller('mainController', function($scope, $rootScope) {
-
-
-
     $scope.langs = [{name:"한글", value:"data/saying_ko.json"},
        {name:"English", value:"data/saying_en.json"}];
 
