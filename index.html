@@ -2,12 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
 <meta http-equiv="Content-Type" Content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="hangul.min.js" type="text/javascript"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-animate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-cookies.js"></script>
+
+<script src="https://cdn.rawgit.com/angular-translate/bower-angular-translate/2.16.0/angular-translate.js"></script>
+<script src="https://cdn.rawgit.com/angular-translate/bower-angular-translate-interpolation-messageformat/2.16.0/angular-translate-interpolation-messageformat.js"></script>
+<script src="https://cdn.rawgit.com/angular-translate/bower-angular-translate-storage-cookie/2.16.0/angular-translate-storage-cookie.js"></script>
+<script src="https://cdn.rawgit.com/angular-translate/bower-angular-translate-storage-local/2.16.0/angular-translate-storage-local.js"></script>
+<script src="https://cdn.rawgit.com/angular-translate/bower-angular-translate-loader-url/2.16.0/angular-translate-loader-url.js"></script>
+<script src="https://cdn.rawgit.com/angular-translate/bower-angular-translate-loader-static-files/2.16.0/angular-translate-loader-static-files.js"></script>
+<script src="https://cdn.rawgit.com/angular-translate/bower-angular-translate-handler-log/2.16.0/angular-translate-handler-log.js"></script>
+
+
 <head>
     <title>속담 타자 연습</title>
 
@@ -31,6 +45,49 @@
     </style>
 </head>
 <body ng-app="myApp">
+        <nav class="navbar navbar-default ng-scope" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                       
+                    </div>
+                    <div class="navbar-collapse collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()" style="height: 0px;">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li ui-sref-active="active" class="active">
+                                <a ui-sref="home" ng-click="vm.collapseNavbar()" href="#/">
+                                    <span class="glyphicon glyphicon-home"></span>
+                                    <span class="hidden-sm ng-scope" >홈</span>
+                                </a>
+                            </li>
+                            <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+                            <!-- ngSwitchWhen: true -->
+                            
+                            <!-- ngSwitchWhen: true -->
+                            <li ui-sref-active="active" uib-dropdown="" class="dropdown pointer ng-scope" >
+                                <!-- ngIf: languageVm.languages.length > 1 --><a class="dropdown-toggle ng-scope" uib-dropdown-toggle="" href="" ng-if="languageVm.languages.length > 1" aria-haspopup="true" aria-expanded="false">
+                                    <span>
+                                        <span class="glyphicon glyphicon-flag"></span>
+                                        <span class="hidden-sm ng-scope" data-translate="global.menu.language">언어</span>
+                                        <b class="caret"></b>
+                                    </span>
+                                </a><!-- end ngIf: languageVm.languages.length > 1 -->
+                                <!-- ngIf: languageVm.languages.length > 1 --><ul class="dropdown-menu ng-scope" uib-dropdown-menu="" ng-if="languageVm.languages.length > 1">
+                                    <!-- ngRepeat: language in languageVm.languages --><li active-menu="ko" ng-repeat="language in languageVm.languages" class="ng-scope active">
+                                        <a href="" ng-click="languageVm.changeLanguage(language);vm.collapseNavbar();" class="ng-binding">한국어</a>
+                                    </li><!-- end ngRepeat: language in languageVm.languages --><li active-menu="en" ng-repeat="language in languageVm.languages" class="ng-scope">
+                                        <a href="" ng-click="languageVm.changeLanguage(language);vm.collapseNavbar();" class="ng-binding">English</a>
+                                    </li><!-- end ngRepeat: language in languageVm.languages -->
+                                </ul><!-- end ngIf: languageVm.languages.length > 1 -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
 <div ng-view></div>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

@@ -14,20 +14,20 @@
 
 <div class="navbar-header">
     <a href="#/!">
-        <span class="glyphicon glyphicon-home" ></span> 홈으로
+        <span class="glyphicon glyphicon-home" ></span> <span translate>GO_HOME</span>
     </a>
 </div>
 
 <div ng-controller="typingController" name="outline">
     <br>
     <br>
-    <label>속담:</label> <input type="text"  class="form-control" ng-model="inputData" ng-style="inputStyle" readonly><br>
+    <label><span translate>SAYING</span>:</label> <input type="text"  class="form-control" ng-model="inputData" ng-style="inputStyle" readonly><br>
     <br>
-    <label>속담을 입력 하세요:</label> <input type="text"  class="form-control" ng-model="outputData" ng-keydown="typing($event)"
+    <label><span translate>INPUT_SAYING</span>:</label> <input type="text"  class="form-control" ng-model="outputData" ng-keydown="typing($event)"
                                       ng-style="outputStyle" autoFocus> <br>
-    분당 속도 : {{curScore}}<br>
-    최고 분당 속도 : {{maxScore}}<br>
-    시간 : {{spendSecond}} 초<br>
+    <span translate>SPEED_PER_MINUTE</span> : {{curScore}}<br>
+    <span translate>MAX_SPEED_PER_MINUTE</span> : {{maxScore}}<br>
+    <span translate>HOURS</span> : {{spendSecond}} <span translate>SECONDS</span><br>
 
 </div>
 
