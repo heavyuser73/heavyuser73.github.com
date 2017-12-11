@@ -1,17 +1,36 @@
 'use strict';
 
+var enLangPath = 'data/saying_en.json';
+var koLangPath = 'data/saying_ko.json';
+
 var app = angular.module("myApp", ['ngRoute', 'pascalprecht.translate', 'ngSanitize', 'ngCookies']);
 
 app.controller('mainController', function($scope, $translate) {
-    $scope.langs = [{name:"한글", value:"data/saying_ko.json", langKey:"ko"},
-       {name:"English", value:"data/saying_en.json", langKey:"en"}];
+    $scope.langs = [{name:"한글", value:koLangPath, langKey:"ko"},
+       {name:"English", value:enLangPath, langKey:"en"}];
 
-    var defaultLangPath = "data/saying_ko.json";
-    setCookie("langPath", defaultLangPath, 365);
+   
+    
     $scope.selectedLangChanged = function () {
         setCookie("langPath", $scope.selectLang.value, 365);
-        $translate.use($scope.selectLang.langKey);
+        $translate.use($scope.selectLang.langKey);    
+            
     }
+    var langPath = getCookie("langPath");
+    if(langPath){
+        if(langPath == koLangPath) {
+            $scope.selectLang = $scope.langs[0];
+        }
+        else {
+            $scope.selectLang = $scope.langs[1];
+        }
+    }
+    else {
+        setCookie("langPath", koLangPath, 365);
+        $scope.selectLang = $scope.langs[0];
+    }
+    
+    
 });
 
 

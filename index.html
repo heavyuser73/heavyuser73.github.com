@@ -44,52 +44,13 @@
         }
     </style>
 </head>
-<body ng-app="myApp">
-        <nav class="navbar navbar-default ng-scope" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                       
-                    </div>
-                    <div class="navbar-collapse collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()" style="height: 0px;">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li ui-sref-active="active" class="active">
-                                <a ui-sref="home" ng-click="vm.collapseNavbar()" href="#/">
-                                    <span class="glyphicon glyphicon-home"></span>
-                                    <span class="hidden-sm ng-scope" >홈</span>
-                                </a>
-                            </li>
-                            <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-                            <!-- ngSwitchWhen: true -->
-                            
-                            <!-- ngSwitchWhen: true -->
-                            <li ui-sref-active="active" uib-dropdown="" class="dropdown pointer ng-scope" >
-                                <!-- ngIf: languageVm.languages.length > 1 --><a class="dropdown-toggle ng-scope" uib-dropdown-toggle="" href="" ng-if="languageVm.languages.length > 1" aria-haspopup="true" aria-expanded="false">
-                                    <span>
-                                        <span class="glyphicon glyphicon-flag"></span>
-                                        <span class="hidden-sm ng-scope" data-translate="global.menu.language">언어</span>
-                                        <b class="caret"></b>
-                                    </span>
-                                </a><!-- end ngIf: languageVm.languages.length > 1 -->
-                                <!-- ngIf: languageVm.languages.length > 1 --><ul class="dropdown-menu ng-scope" uib-dropdown-menu="" ng-if="languageVm.languages.length > 1">
-                                    <!-- ngRepeat: language in languageVm.languages --><li active-menu="ko" ng-repeat="language in languageVm.languages" class="ng-scope active">
-                                        <a href="" ng-click="languageVm.changeLanguage(language);vm.collapseNavbar();" class="ng-binding">한국어</a>
-                                    </li><!-- end ngRepeat: language in languageVm.languages --><li active-menu="en" ng-repeat="language in languageVm.languages" class="ng-scope">
-                                        <a href="" ng-click="languageVm.changeLanguage(language);vm.collapseNavbar();" class="ng-binding">English</a>
-                                    </li><!-- end ngRepeat: language in languageVm.languages -->
-                                </ul><!-- end ngIf: languageVm.languages.length > 1 -->
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-<div ng-view></div>
 
+
+
+<body ng-app="myApp">
+   
+<div ng-view></div>
+  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81190170-7"></script>
 <script>
