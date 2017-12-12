@@ -57,7 +57,8 @@ var translationsEN = {
     HOURS : "Hour",
     SECONDS : "Second",
     KOREAN_LANG : "Korean",
-    ENGLISH_LANG : "English"
+    ENGLISH_LANG : "English",
+    REAL_SPEED_PER_MINUTE : "Realtime speed per minute",
   };
   
   var translationsKO= {
@@ -77,7 +78,8 @@ var translationsEN = {
     HOURS : "시간",
     SECONDS : "초",
     KOREAN_LANG : "한국어",
-    ENGLISH_LANG : "영어"
+    ENGLISH_LANG : "영어",
+    REAL_SPEED_PER_MINUTE : "현재 분당 속도"
   };
 
 
@@ -118,10 +120,14 @@ app.controller('typingController', function($scope, $interval, $http) {
     $scope.maxScore=0;
     $scope.spendSecond=0;
     $scope.startTime=0;
+    $scope.realTimeScore=0;
 
     $interval(function () {
         if($scope.isStart == true) {
             $scope.spendSecond = Math.floor((new Date().getTime() - $scope.startTime)/1000);
+            var takeTime = new Date().getTime() - $scope.startTime;
+            var realTimeLeng = Hangul.disassemble($scope.inputData).length;
+            $scope.realTimeScore=Math.floor((realTimeLeng/(takeTime/1000))*60);
         }
     }, 10);
 
