@@ -10,13 +10,17 @@ app.controller('mainController', function($scope, $translate) {
         {name:"한글", value:koLangPath, langKey:"ko"},
         {name:"English", value:enLangPath, langKey:"en"}
     ];
-   
-    
     $scope.selectedLangChanged = function () {
-        localStorage.langPath = $scope.selectLang.value;
-        $translate.use($scope.selectLang.langKey);    
+        localStorage.langPath = $scope.selectLang.value;  
             
-    }
+    };
+    $scope.clickKoLang = function (event) {
+        $translate.use("ko");
+    };
+    $scope.clickEnLang = function (event) {
+        $translate.use("en");
+    };
+
     var langPath = localStorage.langPath;
     if(langPath){
         if(langPath == koLangPath) {
@@ -30,6 +34,7 @@ app.controller('mainController', function($scope, $translate) {
         localStorage.langPath = koLangPath;
         $scope.selectLang = $scope.langs[0];
     }
+    
     
     
 });
@@ -50,7 +55,9 @@ var translationsEN = {
     SPEED_PER_MINUTE : "Speed per minute",
     MAX_SPEED_PER_MINUTE : "Max speed per minute",
     HOURS : "Hour",
-    SECONDS : "Second"
+    SECONDS : "Second",
+    KOREAN_LANG : "Korean",
+    ENGLISH_LANG : "English"
   };
   
   var translationsKO= {
@@ -68,7 +75,9 @@ var translationsEN = {
     SPEED_PER_MINUTE : "분당 속도",
     MAX_SPEED_PER_MINUTE : "분당 최고 속도",
     HOURS : "시간",
-    SECONDS : "초"
+    SECONDS : "초",
+    KOREAN_LANG : "한국어",
+    ENGLISH_LANG : "영어"
   };
 
 
