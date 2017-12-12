@@ -56,7 +56,7 @@ var translationsEN = {
     MAX_SPEED_PER_MINUTE : "Max speed per minute",
     HOURS : "Hour",
     SECONDS : "Second",
-    KOREAN_LANG : "Korean",
+    KOREAN_LANG : "한국어",
     ENGLISH_LANG : "English",
     REAL_SPEED_PER_MINUTE : "Realtime speed per minute",
   };
@@ -78,7 +78,7 @@ var translationsEN = {
     HOURS : "시간",
     SECONDS : "초",
     KOREAN_LANG : "한국어",
-    ENGLISH_LANG : "영어",
+    ENGLISH_LANG : "English",
     REAL_SPEED_PER_MINUTE : "현재 분당 속도"
   };
 
