@@ -6,17 +6,18 @@ var koLangPath = 'data/saying_ko.json';
 var app = angular.module("myApp", ['ngRoute', 'pascalprecht.translate', 'ngSanitize', 'ngCookies']);
 
 app.controller('mainController', function($scope, $translate) {
-    $scope.langs = [{name:"한글", value:koLangPath, langKey:"ko"},
-       {name:"English", value:enLangPath, langKey:"en"}];
-
+    $scope.langs = [
+        {name:"한글", value:koLangPath, langKey:"ko"},
+        {name:"English", value:enLangPath, langKey:"en"}
+    ];
    
     
     $scope.selectedLangChanged = function () {
-        setCookie("langPath", $scope.selectLang.value, 365);
+        localStorage.langPath = $scope.selectLang.value;
         $translate.use($scope.selectLang.langKey);    
             
     }
-    var langPath = getCookie("langPath");
+    var langPath = localStorage.langPath;
     if(langPath){
         if(langPath == koLangPath) {
             $scope.selectLang = $scope.langs[0];
@@ -26,7 +27,7 @@ app.controller('mainController', function($scope, $translate) {
         }
     }
     else {
-        setCookie("langPath", koLangPath, 365);
+        localStorage.langPath = koLangPath;
         $scope.selectLang = $scope.langs[0];
     }
     
@@ -73,7 +74,7 @@ var translationsEN = {
 
 app.controller('typingController', function($scope, $interval, $http) {
     $scope.returnAudio = new Audio('res/typewriter-line-break.mp3');
-    var langPath = getCookie("langPath");
+    var langPath = localStorage.langPath;
     var path;
     if(langPath != "") {
         path = langPath;
@@ -194,26 +195,3 @@ app.config(['$translateProvider', function ($translateProvider) {
     $translateProvider.useSanitizeValueStrategy('sanitize');
     $translateProvider.useLocalStorage();
   }]);
-
-  
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
