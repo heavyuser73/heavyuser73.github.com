@@ -126,7 +126,7 @@ app.controller('typingController', function($scope, $interval, $http) {
         if($scope.isStart == true) {
             $scope.spendSecond = Math.floor((new Date().getTime() - $scope.startTime)/1000);
             var takeTime = new Date().getTime() - $scope.startTime;
-            var realTimeLeng = Hangul.disassemble($scope.inputData).length;
+            var realTimeLeng = Hangul.disassemble($scope.outputData).length;
             $scope.realTimeScore=Math.floor((realTimeLeng/(takeTime/1000))*60);
         }
     }, 10);
@@ -152,14 +152,16 @@ app.controller('typingController', function($scope, $interval, $http) {
         }
     }
 
-    $scope.typeDone = function () {
-        $scope.outputData = "";
-        $scope.takeTime = new Date().getTime() - $scope.startTime;
-        $scope.curScore=Math.floor(($scope.inputDataLength/($scope.takeTime/1000))*60);
+    $scope.typeDone = function () {        
+        var takeTime = new Date().getTime() - $scope.startTime;
+        $scope.curScore=Math.floor(($scope.inputDataLength/(takeTime/1000))*60);
+        var realTimeLeng = Hangul.disassemble($scope.outputData).length + 1;
+        $scope.realTimeScore=Math.floor((realTimeLeng/(takeTime/1000))*60);
         if($scope.maxScore < $scope.curScore) {
             $scope.maxScore = $scope.curScore;
         }
         $scope.isStart = false;
+        $scope.outputData = "";
         $scope.init();
     }
 
