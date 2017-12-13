@@ -1,1 +1,1 @@
-# 속담 타자 연습
+# 속담 타자 연습 (Saying typing exercise)
