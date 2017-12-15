@@ -7,24 +7,24 @@
 </head>
 
 
-
-<div class="navbar-header">
-    <a href="#/!">
-        <span class="glyphicon glyphicon-home" ></span> <span translate>GO_HOME</span>
-    </a>
-</div>
-<br>
-<div ng-controller="typingController" name="outline">
-    <label><span translate>SAYING</span>:</label> 
-    <div class="outline">{{inputData}}</div>
+<div ng-controller="typingController">
+    <div class="navbar-header">
+        <a href="#/!">
+            <span class="glyphicon glyphicon-home" ></span> <span translate>GO_HOME</span>
+        </a>
+    </div>
+    <lable class="toptypingstatus" ng-show="maxScore"><span translate>MAX_SPEED_PER_MINUTE</span> : <span>{{maxScore}}</span></lable>
     <br>
-    <input type="text"   class="outline" ng-model="outputData" ng-keydown="typing($event)"
-                                      ng-style="outputStyle" autoFocus>
-    <lable class="typingstatus"><span translate>SPEED_PER_MINUTE</span> : <span>{{curScore}}</span></lable> <br>
-    <lable class="typingstatus"><span translate>MAX_SPEED_PER_MINUTE</span> : <span>{{maxScore}}</span></lable> <br>
-    <lable class="typingstatus"><span translate>HOURS</span> : <span>{{spendSecond}}</span> <span translate>SECONDS</span></lable> <br>
-    <lable class="typingstatus"><span translate>REAL_SPEED_PER_MINUTE</span> : <span >{{realTimeScore}}</span></lable> <br>
-
+    <div>    
+        <br>
+        <label><span translate>SAYING</span>:</label> <div class="outline">{{inputData}}</div>
+        <br>
+        <label><span translate>INPUT_SAYING</span>:</label> <input type="text"   class="outline" ng-model="outputData" ng-keydown="typing($event)"
+                                        ng-style="outputStyle" autoFocus>
+        <lable class="typingstatus"><span translate>SPEED_PER_MINUTE</span> : <span>{{curScore}}</span></lable> <br>
+        <lable class="typingstatus"><span translate>HOURS</span> : <span>{{spendSecond}}</span> <span translate>SECONDS</span></lable> <br>
+        <lable class="typingstatus"><span translate>REAL_SPEED_PER_MINUTE</span> : <span >{{realTimeScore}}</span></lable> <br>
+    </div>
 </div>
 
 
