@@ -14,9 +14,9 @@
     </a>
 </div>
 <br>
-<div ng-controller="typingController" name="outline">    
-    <br>
-    <label><span translate>SAYING</span>:</label> <div class="outline">{{inputData}}</div>
+<div ng-controller="typingController" name="outline">
+    <label><span translate>SAYING</span>:</label> 
+    <div class="outline">{{inputData}}</div>
     <br>
     <input type="text"   class="outline" ng-model="outputData" ng-keydown="typing($event)"
                                       ng-style="outputStyle" autoFocus>
