@@ -117,7 +117,12 @@ app.controller('typingController', function($scope, $interval, $http) {
     $scope.inputData="";
     $scope.outputData="";
     $scope.curScore=0;
-    $scope.maxScore=0;
+    if(!localStorage.maxScore) {
+        $scope.maxScore = localStorage.maxScore=0;
+    }
+    else {
+        $scope.maxScore = localStorage.maxScore;
+    }
     $scope.spendSecond=0;
     $scope.startTime=0;
     $scope.realTimeScore=0;
@@ -157,8 +162,8 @@ app.controller('typingController', function($scope, $interval, $http) {
         $scope.curScore=Math.floor(($scope.inputDataLength/(takeTime/1000))*60);
         var realTimeLeng = Hangul.disassemble($scope.outputData).length + 1;
         $scope.realTimeScore=Math.floor((realTimeLeng/(takeTime/1000))*60);
-        if($scope.maxScore < $scope.curScore) {
-            $scope.maxScore = $scope.curScore;
+        if(localStorage.maxScore < $scope.curScore) {
+            $scope.maxScore = localStorage.maxScore = $scope.curScore;
         }
         $scope.isStart = false;
         $scope.outputData = "";
