@@ -118,7 +118,6 @@ app.controller('mainController', function($scope, $translate) {
     
 });
 
-
 var translationsEN = {
     SAYING_TYPING_MAIN_TITLE: 'Saying Typing Exercise',
     SAYING_TYPING_SUB_TITLE: "Let's practice typing!",
