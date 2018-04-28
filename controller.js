@@ -230,8 +230,11 @@ app.controller('typingController', function($scope, $interval, $http) {
         // Enter key down
         if($event.keyCode == 13) {
             $scope.returnAudio.play();
-            if($scope.typeCheck() == true)
+            var ret = $scope.typeCheck();
+            if(ret == true)
                 $scope.typeDone();
+            else
+                $scope.typeFailed();
         }
     }
 
@@ -248,6 +251,13 @@ app.controller('typingController', function($scope, $interval, $http) {
         $scope.init();
     }
 
+    $scope.typeFailed = function () {      
+        $scope.curScore=0;
+        $scope.realTimeScore=0;
+        $scope.isStart = false;
+        $scope.outputData = "";
+        $scope.init();
+    }
     $scope.typeCheck = function () {
         var source = $scope.inputData.trim();
         var target = $scope.outputData.trim();
