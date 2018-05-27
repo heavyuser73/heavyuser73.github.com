@@ -312,8 +312,6 @@ app.config(['$translateProvider', function ($translateProvider) {
         $translateProvider.preferredLanguage('en');
     }
 
-    var test = $translateProvider.determinePreferredLanguage();
-
     // Enable escaping of HTML
     $translateProvider.useSanitizeValueStrategy('sanitize');
     $translateProvider.useLocalStorage();
