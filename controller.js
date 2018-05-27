@@ -299,8 +299,21 @@ app.config(['$translateProvider', function ($translateProvider) {
     // add translation tables
     $translateProvider.translations('en', translationsEN);
     $translateProvider.translations('ko', translationsKO);
-    $translateProvider.fallbackLanguage('ko');
-    $translateProvider.preferredLanguage('ko');   
+
+    var userLang = navigator.languages
+    ? navigator.languages[0]
+    : (navigator.language || navigator.userLanguage)
+
+    $translateProvider.fallbackLanguage('en');
+    if (userLang == 'ko') {
+        $translateProvider.preferredLanguage('ko');
+    } 
+    else {
+        $translateProvider.preferredLanguage('en');
+    }
+
+    var test = $translateProvider.determinePreferredLanguage();
+
     // Enable escaping of HTML
     $translateProvider.useSanitizeValueStrategy('sanitize');
     $translateProvider.useLocalStorage();
