@@ -5,7 +5,8 @@ var koLangPath = 'data/saying_ko.json';
 
 var app = angular.module("myApp", ['ngRoute', 'pascalprecht.translate', 'ngSanitize', 'ngCookies']);
 
-app.controller('mainController', function($scope, $translate) {
+app.controller('mainController', function($scope, $translate, $http) {
+
     $scope.langs = [
         {name:"한글", value:koLangPath, langKey:"ko"},
         {name:"English", value:enLangPath, langKey:"en"}
@@ -34,7 +35,17 @@ app.controller('mainController', function($scope, $translate) {
         localStorage.langPath = koLangPath;
         $scope.selectLang = $scope.langs[0];
     }
-    
+
+    $http({
+        method: 'GET',
+        url: 'http://ec2-13-125-253-111.ap-northeast-2.compute.amazonaws.com:8080/visitCount'
+    }).then(function successCallback(response) {
+          var nCount = response.data.visitCount;
+          $scope.visitCount = nCount;
+    }, function errorCallback(response) {
+          response;
+    });
+
     //clock
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
@@ -137,6 +148,7 @@ var translationsEN = {
     KOREAN_LANG : "한국어",
     ENGLISH_LANG : "English",
     REAL_SPEED_PER_MINUTE : "Realtime speed per minute",
+    VISITOR_COUNTER : "Visitor counter : "
   };
   
   var translationsKO= {
@@ -157,7 +169,8 @@ var translationsEN = {
     SECONDS : "초",
     KOREAN_LANG : "한국어",
     ENGLISH_LANG : "English",
-    REAL_SPEED_PER_MINUTE : "현재 분당 속도"
+    REAL_SPEED_PER_MINUTE : "현재 분당 속도",
+    VISITOR_COUNTER : "방문자 카운트 : "
   };
 
 

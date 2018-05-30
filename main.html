@@ -1,55 +1,58 @@
-<!-- Navbar -->
-<nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
-        </button>
+<div ng-controller="mainController">
+  <!-- Navbar -->
+  <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="" ng-model="koLang" ng-click="clickKoLang(event)" ><span translate>KOREAN_LANG</span></a></li>
+            <li><a href="" ng-model="enLang" ng-click="clickEnLang(event)"><span translate>ENGLISH_LANG</span></a></li>
+          </ul>
+        </div>
       </div>
-      <div ng-controller="mainController" class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="" ng-model="koLang" ng-click="clickKoLang(event)" ><span translate>KOREAN_LANG</span></a></li>
-          <li><a href="" ng-model="enLang" ng-click="clickEnLang(event)"><span translate>ENGLISH_LANG</span></a></li>
-        </ul>
+    </nav>
+
+  <div class="container-fluid bg-1 text-center">
+      <h3><span translate>SAYING_TYPING_MAIN_TITLE</span></h3>
+      <img src="res/hhkb.jpg" class="img-circle" alt="Bird" width="350" height="350">
+      <h3><span translate>SAYING_TYPING_SUB_TITLE</span></h3>
+      <p><span translate>VISITOR_COUNTER</span>{{visitCount}}</p>
+  </div>
+
+  <div class="container-fluid bg-2 text-center">
+      <h3><span translate>TYPING_EXERCISE</span></h3>
+      <p><span translate>TYPING_EXERCISE_EXPAIN</span></p>
+      <div align="center">
+          <select class="form-control" id="selLang" style="width:auto;"
+                  ng-model="selectLang"
+                  ng-options = "lang.name for lang in langs"
+                  ng-change="selectedLangChanged()" >
+
+          </select>
       </div>
-    </div>
-  </nav>
+      <br>
+      <a  href="#!typing" class="btn btn-default btn-lg">
+          <span class="glyphicon glyphicon-education" ></span> <span translate>START</span>
+      </a>
+  </div>
 
-<div class="container-fluid bg-1 text-center">
-    <h3><span translate>SAYING_TYPING_MAIN_TITLE</span></h3>
-    <img src="res/hhkb.jpg" class="img-circle" alt="Bird" width="350" height="350">
-    <h3><span translate>SAYING_TYPING_SUB_TITLE</span></h3>
+
+  <div class="bg-3 text-center">
+  <canvas id="canvas" width="300" height="300"
+  style="background-color:rgba(255, 255, 255, 0)">
+  </canvas>
+  </div>
+  <div class="bg-3 text-center">    
+      <h3><span translate>DEVELOPER</span></h3>
+      <p>heavyuser73@gmail.com</p>
+      <a href="https://github.com/heavyuser73/heavyuser73.github.com">GitHub</a>
+      <br>
+      <br>
+  </div>
 </div>
-
-<div ng-controller="mainController"  class="container-fluid bg-2 text-center">
-    <h3><span translate>TYPING_EXERCISE</span></h3>
-    <p><span translate>TYPING_EXERCISE_EXPAIN</span></p>
-    <div align="center">
-        <select class="form-control" id="selLang" style="width:auto;"
-                ng-model="selectLang"
-                ng-options = "lang.name for lang in langs"
-                ng-change="selectedLangChanged()" >
-
-        </select>
-    </div>
-    <br>
-    <a  href="#!typing" class="btn btn-default btn-lg">
-        <span class="glyphicon glyphicon-education" ></span> <span translate>START</span>
-    </a>
-</div>
-
-
-<div class="bg-3 text-center">
-<canvas id="canvas" width="300" height="300"
-style="background-color:rgba(255, 255, 255, 0)">
-</canvas>
-</div>
-<div class="bg-3 text-center">    
-    <h3><span translate>DEVELOPER</span></h3>
-    <p>heavyuser73@gmail.com</p>
-    <a href="https://github.com/heavyuser73/heavyuser73.github.com">GitHub</a>
-    <br>
-    <br>
- </div>
