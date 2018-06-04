@@ -47,9 +47,9 @@ app.controller('mainController', function($scope, $translate, $http) {
     });
 
     //clock
-    var canvas = document.getElementById("canvas");
+    var canvas = document.getElementById("clockCanvas");
     var ctx = canvas.getContext("2d");
-    var radius = canvas.height / 4;
+    var radius = canvas.height / 2;
     ctx.translate(radius, radius);
     radius = radius * 0.90
     setInterval(drawClock, 1000);
@@ -71,7 +71,7 @@ app.controller('mainController', function($scope, $translate, $http) {
       grad.addColorStop(0.5, 'white');
       grad.addColorStop(1, '#333');
       ctx.strokeStyle = grad;
-      ctx.lineWidth = radius*0.1;
+      ctx.lineWidth = radius*0.08;
       ctx.stroke();
       ctx.beginPath();
       ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
