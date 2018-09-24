@@ -23,17 +23,22 @@ def main(argv):
 
     fout.write("[" + "\n")
 
+    print inputfile
+    print outputfile
+
     with open(inputfile, 'r') as ins :
         print "start"
         for line in ins:
             line = line.strip()
-            if len(line) > 0 and line.count('–') > 1:
-                splited_line = line.split('–')
-                splited_line = splited_line[1].split('(')
-                splited_string = splited_line[0].strip()
-                if len(splited_string) > 0 : 
-                    fout.write("\"" + splited_string + "\"," + "\n")
-                    print splited_string
+            # if len(line) > 0 and line.count('–') > 1:
+            #     splited_line = line.split('–')
+            #     splited_line = splited_line[1].split('(')
+            #     splited_string = splited_line[0].strip()
+            #     if len(splited_string) > 0 : 
+            #         fout.write("\"" + splited_string + "\"," + "\n")
+            #         print splited_string
+            if len(line) > 0 : 
+                fout.write("\"" + line + "\"," + "\n") 
         print "end"
     fout.write("]" + "\n")
     fout.close()
