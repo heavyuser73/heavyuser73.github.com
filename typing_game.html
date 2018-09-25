@@ -1020,12 +1020,17 @@ var gInterval=30;
 var gId;
 
 var bGameOver = false;
+
 function startGame() {    
     //myGamePiece = new component(30, 30, "red", 10, 120);
     //myGamePiece = new component("30px", "Consolas", "blue", 280, 100, "text");
     //myGamePiece.gravity = 0.05;
+
+    var btnRestart = document.getElementById("restart");
+    btnRestart.style.display = "none";
+
     myScore = new component("30px", "Consolas", "red", 800, 40, "text");
-    myScore.text = "SCORE: 0";
+    myScore.text = "SCORE: 0000";
     myGameArea.start();
 
     window.addEventListener('resize', resizeCanvas, false);
@@ -1035,7 +1040,7 @@ function startGame() {
     
         myGameArea.canvas.width = window.innerWidth - (gapWidth * 2);
         myGameArea.canvas.height = window.innerHeight - 100;
-        
+
         /**
          * Your drawings need to be inside this function otherwise they will be reset when 
          * you resize the browser window and the canvas goes will be cleared.
@@ -1046,11 +1051,12 @@ function startGame() {
     
     var inputTyping = document.getElementById("typing");
     inputTyping.addEventListener("keyup", function(event) {
-        event.preventDefault();
-        if (event.keyCode === 13) {
-            
+        
+        if (event.keyCode === 13 || event.keyCode === 32 ) {
+            event.preventDefault();
+            var aaa = inputTyping.value.trim();
             for(var i=0;i<myObstacles.length;i++) {
-                if(myObstacles[i].text == inputTyping.value) {
+                if(myObstacles[i].text == aaa) {
                     myObstacles.splice(i,1);
                     clearInterval(gId);
                     gInterval = gInterval - 1;
@@ -1066,7 +1072,7 @@ function startGame() {
 
     function drawStuff() {
             myScore.w = myGameArea.canvas.getContext("2d").measureText(myScore.text).width;
-            myScore.x = (myGameArea.canvas.width / 2) - (myScore.w/2);
+            myScore.x = (myGameArea.canvas.width / 2) - (myScore.w);
     }
 }
 
@@ -1150,6 +1156,8 @@ function updateGameArea() {
     for (i = 0; i < myObstacles.length; i += 1) {
         if(myObstacles[i].y > myGameArea.canvas.height) {
             bGameOver = true;
+            var btnRestart = document.getElementById("restart");
+            btnRestart.style.display = "block";
             return;
         }
     }
@@ -1170,14 +1178,18 @@ function updateGameArea() {
         var index = Math.floor((Math.random() * testWord.length));
         word = testWord[index];
 
-        tempSize = myGameArea.canvas.getContext("2d").measureText(word).width;
+        var ctx=myGameArea.canvas.getContext("2d");
+        ctx.font = "25px Consolas";
+        ctx.txt = word;
+
+        tempSize = ctx.measureText(word).width;
         randomX = (myGameArea.canvas.width - tempSize) * Math.random();
 
-        var texts = new component("30px", "Consolas", "black", randomX, 40, "text");
+        var texts = new component("25px", "Consolas", "black", randomX, 40, "text");
 
         
 
-        texts.text = word
+        texts.text = word;
         myObstacles.push(texts);
     }
     for (i = 0; i < myObstacles.length; i += 1) {
@@ -1204,8 +1216,15 @@ function accelerate(n) {
     //myGamePiece.gravity = n;
 }
 
+function clickRestartFunc() {
+    location.reload();
+}
 
 </script>
+
+<div id="restart" style="text-align: center">
+    <button onclick="clickRestartFunc()" id="s" type="button">restart</button>
+</div>
 <br>
 <div style="text-align: center">
     <input id="typing" class="outline" type="text" style="width:70%;" autofocus>
