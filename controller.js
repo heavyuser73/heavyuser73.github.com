@@ -150,8 +150,8 @@ var translationsEN = {
     REAL_SPEED_PER_MINUTE : "Realtime speed per minute",
     VISITOR_COUNTER : "Visitor counter : ",
     GAME_START: 'Start',
-    TYPING_GAME: '타자 게임(베타)',
-    TYPING_GAME_EXPAIN: '타자 게임을 할 수 있는 곳입니다.'
+    TYPING_GAME: 'Typing game for Hangul(beta)',
+    TYPING_GAME_EXPAIN: 'It is a place where anyone can typing Hangul game.'
   };
   
   var translationsKO= {
@@ -175,8 +175,8 @@ var translationsEN = {
     REAL_SPEED_PER_MINUTE : "현재 분당 속도",
     VISITOR_COUNTER : "방문자 카운트 : ",
     GAME_START: '게임 시작',
-    TYPING_GAME: '타자 게임(베타)',
-    TYPING_GAME_EXPAIN: '타자 게임을 할 수 있는 곳입니다.'
+    TYPING_GAME: '한글 타자 게임(베타)',
+    TYPING_GAME_EXPAIN: '한글 타자 게임을 할 수 있는 곳입니다.'
   };
 
 
