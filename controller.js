@@ -1362,7 +1362,8 @@ var myObstacles = [];
 var myScore;
 var gInterval;
 var gId=0;
-
+var gameLevel = 1;
+var levelCounter = 0;
 var bGameOver = false;
 
 
@@ -1377,7 +1378,7 @@ function startGame() {
     var btnRestart = document.getElementById("restart");
     btnRestart.style.display = "none";
 
-    myScore = new component("30px", "Consolas", "red", 800, 40, "text");
+    myScore = new component("20px", "Consolas", "red", 800, 40, "text");
     myScore.text = "SCORE: 0000";
     myGameArea.start();
 
@@ -1407,7 +1408,12 @@ function startGame() {
                 if(myObstacles[i].text == aaa) {
                     myObstacles.splice(i,1);
                     clearInterval(gId);
-                    gInterval = gInterval - 1;
+                    if(levelCounter == 5) {
+                        gInterval = gInterval - 5;
+                        levelCounter = 0;
+                        gameLevel++;
+                    }
+                    levelCounter++;
                     gId = setInterval(updateGameArea, gInterval);
                     break;
                 }
@@ -1419,8 +1425,8 @@ function startGame() {
 
 
     function drawStuff() {
-            myScore.w = myGameArea.canvas.getContext("2d").measureText(myScore.text).width;
-            myScore.x = (myGameArea.canvas.width / 2) - (myScore.w);
+        myScore.w = myGameArea.canvas.getContext("2d").measureText(myScore.text).width;
+        myScore.x = (myGameArea.canvas.width / 2) - (myScore.w);
     }
 }
 
@@ -1533,13 +1539,12 @@ function updateGameArea() {
         var word = testWord[index];
 
         var ctx=myGameArea.canvas.getContext("2d");
-        ctx.font = "25px Consolas";
+        ctx.font = "20px Consolas";
         ctx.txt = word;
-
         var tempSize = ctx.measureText(word).width;
         var randomX = (myGameArea.canvas.width - tempSize) * Math.random();
 
-        var texts = new component("25px", "Consolas", "black", randomX, 40, "text");
+        var texts = new component("20px", "Consolas", "black", randomX, 40, "text");
 
         
 
@@ -1550,8 +1555,11 @@ function updateGameArea() {
         myObstacles[i].y += 1;
         myObstacles[i].update();
     }
-    myScore.text="SCORE: " + myGameArea.frameNo;
-    myScore.w = myGameArea.canvas.getContext("2d").measureText(myScore.text).width;
+    myScore.text= "SCORE: " + myGameArea.frameNo;
+    var ctx=myGameArea.canvas.getContext("2d");
+    ctx.font = "25px Consolas";
+    ctx.txt = myScore.text;
+    myScore.w = ctx.measureText(myScore.text).width;
     
     myScore.update();
     // Canvas can tell us the width
