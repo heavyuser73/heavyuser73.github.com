@@ -1387,7 +1387,7 @@ function startGame() {
         var gapWidth = Math.floor((window.innerWidth - document.body.clientWidth)/2)
     
         myGameArea.canvas.width = window.innerWidth - (gapWidth * 2);
-        myGameArea.canvas.height = window.innerHeight - 250;
+        myGameArea.canvas.height = window.innerHeight - 150;
 
         /**
          * Your drawings need to be inside this function otherwise they will be reset when 
