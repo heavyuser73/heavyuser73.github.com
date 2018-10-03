@@ -17,9 +17,11 @@ app.controller('mainController', function($scope, $translate, $http) {
     };
     $scope.clickKoLang = function (event) {
         $translate.use("ko");
+        gtag('click', { 'lang': 'ko' });
     };
     $scope.clickEnLang = function (event) {
         $translate.use("en");
+        gtag('click', { 'lang': 'en' });
     };
 
     var langPath = localStorage.langPath;
