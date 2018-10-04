@@ -11,10 +11,24 @@ app.controller('mainController', function($scope, $translate, $http) {
         {name:"한글", value:koLangPath, langKey:"ko"},
         {name:"English", value:enLangPath, langKey:"en"}
     ];
+
+    $scope.gameLevelSel = [
+        {name:"초급", value:"1"},
+        {name:"중급", value:"2"},
+        {name:"고급", value:"3"},
+        {name:"마스터", value:"4"}
+    ];
+
     $scope.selectedLangChanged = function () {
         localStorage.langPath = $scope.selectLang.value;  
             
     };
+
+    $scope.selectedGameLevelChanged = function () {
+        gameSeLevel = $scope.selectGameLevel.value;  
+            
+    };
+
     $scope.clickKoLang = function (event) {
         $translate.use("ko");
         gtag('click', { 'lang': 'ko' });
@@ -307,6 +321,7 @@ app.controller('typingController', function($scope, $interval, $http) {
 });
 
 app.controller('typingGameController', function($scope, $interval, $http) {
+    $scope.gameSeLevel = 1;
     $scope.onloadFun = function() {
         startGame();
     }
@@ -1365,11 +1380,13 @@ var myScore;
 var gInterval;
 var gId=0;
 var gameLevel = 1;
+var gameSeLevel=1;
 var levelCounter = 0;
 var bGameOver = false;
 
 
-function startGame() {  
+function startGame() { 
+    gameSeLevel; 
     gInterval=30;
     myObstacles = [];
     bGameOver = false;
@@ -1411,7 +1428,20 @@ function startGame() {
                     myObstacles.splice(i,1);
                     clearInterval(gId);
                     if(levelCounter == 5) {
-                        gInterval = gInterval - 5;
+                        var gameValue=0;
+                        if(gameSeLevel == 1) {
+                            gameValue = 3;
+                        }
+                        else if(gameSeLevel == 2) {
+                            gameValue = 5;
+                        }
+                        else if(gameSeLevel == 3) {
+                            gameValue = 6;
+                        }
+                        else {
+                            gameValue = 7;
+                        }
+                        gInterval = gInterval - gameValue ;
                         levelCounter = 0;
                         gameLevel++;
                     }
@@ -1424,6 +1454,7 @@ function startGame() {
             inputTyping.value = '';
         }
     });
+
 
 
     function drawStuff() {

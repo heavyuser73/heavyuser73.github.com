@@ -48,6 +48,16 @@
     <div align="center">
     </div>
     <br>
+    <div align="center">
+      <select class="form-control" id="selGameLevel" style="width:auto;"
+              ng-model="selectGameLevel"
+              ng-options = "level.name for level in gameLevelSel"
+              ng-change="selectedGameLevelChanged()" 
+              ng-init="selectGameLevel = gameLevelSel[0]" >
+
+      </select>
+    </div>
+    <br>
     <a  href="#!typing_game" class="btn btn-default btn-lg">
       <span class="glyphicon glyphicon-education" ></span> <span translate>GAME_START</span>
     </a>
