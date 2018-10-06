@@ -17,10 +17,10 @@ app.controller('mainController', function($scope, $translate, $http) {
     ];
     
     $scope.gameLevelSel = [
-        {name:'BEGINNER', value:"0"},
-        {name:"INTERMEDIATE", value:"1"},
-        {name:"ADVANCED", value:"2"},
-        {name:"MASTER", value:"3"}
+        {name:'BEGINNER', value:"1"},
+        {name:"INTERMEDIATE", value:"2"},
+        {name:"ADVANCED", value:"3"},
+        {name:"MASTER", value:"4"}
     ];
 
     $scope.selectedLangChanged = function () {
@@ -60,7 +60,7 @@ app.controller('mainController', function($scope, $translate, $http) {
         
     }
 
-    $scope.selectGameLevel = $scope.gameLevelSel[parseInt(localStorage.gameLevel)];
+    $scope.selectGameLevel = $scope.gameLevelSel[parseInt(localStorage.gameLevel)-1];
 
     $http({
         method: 'GET',
