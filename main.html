@@ -1,4 +1,4 @@
-<div ng-controller="mainController">
+<div ng-controller="mainController" data-ng-init="init()">
   <!-- Navbar -->
   <nav class="navbar navbar-default">
       <div class="container">
@@ -49,11 +49,12 @@
     </div>
     <br>
     <div align="center">
+      <meta charset="UTF-8">
+      
       <select class="form-control" id="selGameLevel" style="width:auto;"
               ng-model="selectGameLevel"
-              ng-options = "level.name for level in gameLevelSel"
-              ng-change="selectedGameLevelChanged()" 
-              ng-init="selectGameLevel = gameLevelSel[0]" >
+              ng-options = "level.name | translate for level in gameLevelSel"
+              ng-change="selectedGameLevelChanged()" >
 
       </select>
     </div>

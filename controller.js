@@ -7,26 +7,28 @@ var app = angular.module("myApp", ['ngRoute', 'pascalprecht.translate', 'ngSanit
 
 app.controller('mainController', function($scope, $translate, $http) {
 
+    $scope.init = function () {
+        
+    };
+
     $scope.langs = [
         {name:"한글", value:koLangPath, langKey:"ko"},
         {name:"English", value:enLangPath, langKey:"en"}
     ];
-
+    
     $scope.gameLevelSel = [
-        {name:"초급", value:"1"},
-        {name:"중급", value:"2"},
-        {name:"고급", value:"3"},
-        {name:"마스터", value:"4"}
+        {name:'BEGINNER', value:"1"},
+        {name:"INTERMEDIATE", value:"2"},
+        {name:"ADVANCED", value:"3"},
+        {name:"MASTER", value:"4"}
     ];
 
     $scope.selectedLangChanged = function () {
-        localStorage.langPath = $scope.selectLang.value;  
-            
+        localStorage.langPath = $scope.selectLang.value;
     };
 
     $scope.selectedGameLevelChanged = function () {
-        gameSeLevel = $scope.selectGameLevel.value;  
-            
+        localStorage.gameLevel = $scope.selectGameLevel.value;
     };
 
     $scope.clickKoLang = function (event) {
@@ -51,6 +53,14 @@ app.controller('mainController', function($scope, $translate, $http) {
         localStorage.langPath = koLangPath;
         $scope.selectLang = $scope.langs[0];
     }
+
+
+    if (localStorage.gameLevel == 'undefined' || localStorage.gameLevel == null) {
+        localStorage.gameLevel = 1;
+        
+    }
+
+    $scope.selectGameLevel = $scope.gameLevelSel[parseInt(localStorage.gameLevel)-1];
 
     $http({
         method: 'GET',
@@ -167,7 +177,11 @@ var translationsEN = {
     VISITOR_COUNTER : "Visitor counter : ",
     GAME_START: 'Start',
     TYPING_GAME: 'Typing game for Hangul(beta)',
-    TYPING_GAME_EXPAIN: 'It is a place where anyone can typing Hangul game.'
+    TYPING_GAME_EXPAIN: 'It is a place where anyone can typing Hangul game.',
+    BEGINNER:'Beginner',
+    INTERMEDIATE:'Intermediate',
+    ADVANCED:'Advanced',
+    MASTER:"Master"
   };
   
   var translationsKO= {
@@ -192,7 +206,11 @@ var translationsEN = {
     VISITOR_COUNTER : "방문자 카운트 : ",
     GAME_START: '게임 시작',
     TYPING_GAME: '한글 타자 게임(베타)',
-    TYPING_GAME_EXPAIN: '한글 타자 게임을 할 수 있는 곳입니다.'
+    TYPING_GAME_EXPAIN: '한글 타자 게임을 할 수 있는 곳입니다.',
+    BEGINNER:"초급",
+    INTERMEDIATE:'중급',
+    ADVANCED:'고급',
+    MASTER:"마스터"
   };
 
 
@@ -321,7 +339,6 @@ app.controller('typingController', function($scope, $interval, $http) {
 });
 
 app.controller('typingGameController', function($scope, $interval, $http) {
-    $scope.gameSeLevel = 1;
     $scope.onloadFun = function() {
         startGame();
     }
@@ -361,7 +378,7 @@ app.config(['$translateProvider', function ($translateProvider) {
     }
 
     // Enable escaping of HTML
-    $translateProvider.useSanitizeValueStrategy('sanitize');
+    $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
     $translateProvider.useLocalStorage();
   }]);
 
@@ -1379,14 +1396,11 @@ var myObstacles = [];
 var myScore;
 var gInterval;
 var gId=0;
-var gameLevel = 1;
-var gameSeLevel=1;
 var levelCounter = 0;
 var bGameOver = false;
 
 
-function startGame() { 
-    gameSeLevel; 
+function startGame() {
     gInterval=30;
     myObstacles = [];
     bGameOver = false;
@@ -1429,13 +1443,13 @@ function startGame() {
                     clearInterval(gId);
                     if(levelCounter == 5) {
                         var gameValue=0;
-                        if(gameSeLevel == 1) {
+                        if(localStorage.gameLevel == 1) {
                             gameValue = 3;
                         }
-                        else if(gameSeLevel == 2) {
+                        else if(localStorage.gameLevel == 2) {
                             gameValue = 5;
                         }
-                        else if(gameSeLevel == 3) {
+                        else if(localStorage.gameLevel == 3) {
                             gameValue = 6;
                         }
                         else {
@@ -1443,7 +1457,6 @@ function startGame() {
                         }
                         gInterval = gInterval - gameValue ;
                         levelCounter = 0;
-                        gameLevel++;
                     }
                     levelCounter++;
                     gId = setInterval(updateGameArea, gInterval);
