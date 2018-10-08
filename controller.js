@@ -397,12 +397,19 @@ var myObstacles = [];
 var myScore;
 var gInterval;
 var gId=0;
-var levelCounter = 0;
+var gIntervalId =0;
 var bGameOver = false;
-
+var gameValue=0;
+var gameIncreaseInterval = 3;
 
 function startGame() {
-    gInterval=30;
+
+    if(gIntervalId !=0) {
+        clearInterval(gIntervalId);
+        gIntervalId = 0;
+    } 
+    gIntervalId = setInterval(changeInterval, 10000);
+    gInterval= 40 - (localStorage.gameLevel * gameIncreaseInterval * 2);
     myObstacles = [];
     bGameOver = false;
     //myGamePiece = new component(30, 30, "red", 10, 120);
@@ -437,30 +444,11 @@ function startGame() {
         
         if (event.keyCode === 13 || event.keyCode === 32 ) {
             event.preventDefault();
-            var aaa = inputTyping.value.trim();
+            var tempStr = inputTyping.value.trim();
             for(var i=0;i<myObstacles.length;i++) {
-                if(myObstacles[i].text == aaa) {
+                if(myObstacles[i].text == tempStr) {
                     myObstacles.splice(i,1);
-                    clearInterval(gId);
-                    if(levelCounter == 5) {
-                        var gameValue=0;
-                        if(localStorage.gameLevel == 1) {
-                            gameValue = 3;
-                        }
-                        else if(localStorage.gameLevel == 2) {
-                            gameValue = 5;
-                        }
-                        else if(localStorage.gameLevel == 3) {
-                            gameValue = 6;
-                        }
-                        else {
-                            gameValue = 7;
-                        }
-                        gInterval = gInterval - gameValue ;
-                        levelCounter = 0;
-                    }
-                    levelCounter++;
-                    gId = setInterval(updateGameArea, gInterval);
+                    
                     break;
                 }
                 
@@ -487,7 +475,7 @@ var myGameArea = {
         test.appendChild( this.canvas );
         this.frameNo = 0;
 
-        if(gId > 0) {
+        if(gId != 0) {
             clearInterval(gId);
             gId = 0;
         }
@@ -555,6 +543,18 @@ function component(width, height, color, x, y, type) {
     }
 }
 
+function changeInterval() {
+    gInterval = gInterval - gameIncreaseInterval;
+    if(gInterval < 1) {
+        gInterval = 1;
+    }
+
+    if(gId != 0) {
+        clearInterval(gId);
+        gId = 0;
+    }
+    gId = setInterval(updateGameArea, gInterval);
+}
 function updateGameArea() {
 
     if(bGameOver) {
