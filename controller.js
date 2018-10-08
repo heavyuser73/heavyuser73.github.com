@@ -5,7 +5,11 @@ var koLangPath = 'data/saying_ko.json';
 var testWord;
 var app = angular.module("myApp", ['ngRoute', 'pascalprecht.translate', 'ngSanitize', 'ngCookies']);
 
-app.controller('mainController', function($scope, $translate, $http) {
+app.controller('mainController', function($scope, $translate, $http, $window, $location) {
+    
+
+    $window.gtag('config', 'UA-81190170-7', {'page_path': $location.path()});
+    $window.gtag('event', 'page_view');
 
     $scope.init = function () {
         
@@ -33,11 +37,9 @@ app.controller('mainController', function($scope, $translate, $http) {
 
     $scope.clickKoLang = function (event) {
         $translate.use("ko");
-        gtag('click', { 'lang': 'ko' });
     };
     $scope.clickEnLang = function (event) {
         $translate.use("en");
-        gtag('click', { 'lang': 'en' });
     };
 
     var langPath = localStorage.langPath;
@@ -214,7 +216,9 @@ var translationsEN = {
   };
 
 
-app.controller('typingController', function($scope, $interval, $http) {
+app.controller('typingController', function($scope, $interval, $http, $window, $location) {
+    $window.gtag('config', 'UA-81190170-7', {'page_path': $location.path()});
+    $window.gtag('event', 'page_view');
     $scope.returnAudio = new Audio('res/typewriter-line-break.mp3');
     var langPath = localStorage.langPath;
     var path;
@@ -338,7 +342,9 @@ app.controller('typingController', function($scope, $interval, $http) {
     }
 });
 
-app.controller('typingGameController', function($scope, $interval, $http) {
+app.controller('typingGameController', function($scope, $interval, $http, $window, $location) {
+    $window.gtag('config', 'UA-81190170-7', {'page_path': $location.path()});
+    $window.gtag('event', 'page_view');
     $scope.onloadFun = function() {
         startGame();
     }
@@ -408,7 +414,7 @@ function startGame() {
         clearInterval(gIntervalId);
         gIntervalId = 0;
     } 
-    gIntervalId = setInterval(changeInterval, 10000);
+    gIntervalId = setInterval(changeInterval, 20000);
     gInterval= 40 - (localStorage.gameLevel * gameIncreaseInterval * 2);
     myObstacles = [];
     bGameOver = false;
@@ -564,7 +570,7 @@ function updateGameArea() {
         if(myObstacles[i].y > myGameArea.canvas.height) {
             bGameOver = true;
             var btnRestart = document.getElementById("restart");
-            btnRestart.style.display = "block";
+            //btnRestart.style.display = "block";
             return;
         }
     }
