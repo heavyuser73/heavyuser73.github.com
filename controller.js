@@ -428,7 +428,7 @@ function startGame() {
     btnRestart.style.display = "none";
 
     myScore = new component("20px", "Consolas", "blue", 800, 40, "text");
-    myScore.text = "SCORE: 0000";
+    myScore.text = "SCORE: 0";
     myGameArea.start();
 
     window.addEventListener('resize', resizeCanvas, false);
@@ -468,7 +468,7 @@ function startGame() {
 
 
     function drawStuff() {
-        myScore.w = myGameArea.canvas.getContext("2d").measureText(String(myScoreCount)).width;
+        myScore.w = myGameArea.canvas.getContext("2d").measureText(myScore.text).width;
         myScore.x = (myGameArea.canvas.width / 2) - (myScore.w);
     }
 }
