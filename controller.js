@@ -290,10 +290,12 @@ app.controller('typingController', function($scope, $interval, $http, $window, $
         if($event.keyCode == 13) {
             $scope.returnAudio.play();
             var ret = $scope.typeCheck();
-            if(ret == true)
+            if(ret == true) {
                 $scope.typeDone();
-            else
+            }
+            else {
                 $scope.typeFailed();
+            }
         }
     }
 
@@ -407,7 +409,7 @@ var gIntervalId =0;
 var bGameOver = false;
 var gameValue=0;
 var gameIncreaseInterval = 3;
-
+var myScoreCount = 0;
 function startGame() {
 
     if(gIntervalId !=0) {
@@ -425,7 +427,7 @@ function startGame() {
     var btnRestart = document.getElementById("restart");
     btnRestart.style.display = "none";
 
-    myScore = new component("20px", "Consolas", "red", 800, 40, "text");
+    myScore = new component("20px", "Consolas", "blue", 800, 40, "text");
     myScore.text = "SCORE: 0000";
     myGameArea.start();
 
@@ -454,7 +456,7 @@ function startGame() {
             for(var i=0;i<myObstacles.length;i++) {
                 if(myObstacles[i].text == tempStr) {
                     myObstacles.splice(i,1);
-                    
+                    myScoreCount += 10;
                     break;
                 }
                 
@@ -466,7 +468,7 @@ function startGame() {
 
 
     function drawStuff() {
-        myScore.w = myGameArea.canvas.getContext("2d").measureText(myScore.text).width;
+        myScore.w = myGameArea.canvas.getContext("2d").measureText(String(myScoreCount)).width;
         myScore.x = (myGameArea.canvas.width / 2) - (myScore.w);
     }
 }
@@ -570,7 +572,7 @@ function updateGameArea() {
         if(myObstacles[i].y > myGameArea.canvas.height) {
             bGameOver = true;
             var btnRestart = document.getElementById("restart");
-            //btnRestart.style.display = "block";
+            btnRestart.style.display = "block";
             return;
         }
     }
@@ -608,7 +610,7 @@ function updateGameArea() {
         myObstacles[i].y += 1;
         myObstacles[i].update();
     }
-    myScore.text= "SCORE: " + myGameArea.frameNo;
+    myScore.text= "SCORE: " + String(myScoreCount);
     var ctx=myGameArea.canvas.getContext("2d");
     ctx.font = "25px Consolas";
     ctx.txt = myScore.text;
