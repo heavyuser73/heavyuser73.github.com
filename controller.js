@@ -412,6 +412,7 @@ var gameIncreaseInterval = 3;
 var myScoreCount = 0;
 function startGame() {
 
+    myScoreCount = 0;
     if(gIntervalId !=0) {
         clearInterval(gIntervalId);
         gIntervalId = 0;
