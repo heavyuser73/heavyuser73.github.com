@@ -64,15 +64,16 @@ app.controller('mainController', function($scope, $translate, $http, $window, $l
 
     $scope.selectGameLevel = $scope.gameLevelSel[parseInt(localStorage.gameLevel)-1];
 
-    $http({
-        method: 'GET',
-        url: 'http://ec2-13-125-253-111.ap-northeast-2.compute.amazonaws.com:8080/visitCount'
-    }).then(function successCallback(response) {
-          var nCount = response.data.visitCount;
-          $scope.visitCount = nCount;
-    }, function errorCallback(response) {
-          response;
-    });
+    // Don't use counter because no money...
+    // $http({
+    //     method: 'GET',
+    //     url: 'http://ec2-13-125-253-111.ap-northeast-2.compute.amazonaws.com:8080/visitCount'
+    // }).then(function successCallback(response) {
+    //       var nCount = response.data.visitCount;
+    //       $scope.visitCount = nCount;
+    // }, function errorCallback(response) {
+    //       response;
+    //});
 
     //clock
     var canvas = document.getElementById("clockCanvas");
